@@ -3,6 +3,54 @@ const authenticateToken = require('../middleware/auth');
 const userController = require("../api/user/controller")
 
 /**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     BearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: "사용자 ID"
+ *         account_id:
+ *           type: string
+ *           description: "계정 ID"
+ *         name:
+ *           type: string
+ *           description: "사용자 이름"
+ *         file_id:
+ *           type: integer
+ *           description: "파일 ID (옵션)"
+ *         created_at:
+ *           type: string
+ *           format: date-time
+ *           description: "사용자 생성일시"
+ *       example:
+ *         id: 1
+ *         account_id: "develop"
+ *         name: "하이 짱구"
+ *         file_id: 0
+ *         created_at: "2024-07-23T04:47:14Z"
+ *     Error:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           description: "요청 성공 여부"
+ *         message:
+ *           type: string
+ *           description: "에러 메시지"
+ *       example:
+ *         success: false
+ *         message: "가입된 유저가 없습니다."
+ */
+
+/**
 @swagger
  * paths:
  *  /user/join:
@@ -84,54 +132,6 @@ userRouter.post('/login', userController.login);
 
 // 피드 관련 라우트, 모든 요청에 인증 필요
 userRouter.use(authenticateToken);  // 이후 모든 라우트에 인증 적용
-
-/**
- * @swagger
- * components:
- *   securitySchemes:
- *     BearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- *   schemas:
- *     User:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *           description: "사용자 ID"
- *         account_id:
- *           type: string
- *           description: "계정 ID"
- *         name:
- *           type: string
- *           description: "사용자 이름"
- *         file_id:
- *           type: integer
- *           description: "파일 ID (옵션)"
- *         created_at:
- *           type: string
- *           format: date-time
- *           description: "사용자 생성일시"
- *       example:
- *         id: 1
- *         account_id: "develop"
- *         name: "하이 짱구"
- *         file_id: 0
- *         created_at: "2024-07-23T04:47:14Z"
- *     Error:
- *       type: object
- *       properties:
- *         success:
- *           type: boolean
- *           description: "요청 성공 여부"
- *         message:
- *           type: string
- *           description: "에러 메시지"
- *       example:
- *         success: false
- *         message: "가입된 유저가 없습니다."
- */
 
 /**
  * @swagger

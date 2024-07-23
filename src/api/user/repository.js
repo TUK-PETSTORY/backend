@@ -23,8 +23,6 @@ exports.findId = async (id) => {
 }
 
 exports.findAll = async () => {
-    const rows = await pool.query(
-        `SELECT * FROM users`);
-    console.log(rows);
+    const rows = await pool.query(`SELECT * FROM users`);
     return (rows.length === 0) ? null : rows;
 }

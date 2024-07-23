@@ -21,3 +21,10 @@ exports.findId = async (id) => {
         `SELECT id, account_id, name, file_id, created_at FROM users WHERE id = ?`, [id]);
     return (result.length < 0) ? null : result[0];
 }
+
+exports.findAll = async () => {
+    const rows = await pool.query(
+        `SELECT * FROM users`);
+    console.log(rows);
+    return (rows.length === 0) ? null : rows;
+}

@@ -1,4 +1,5 @@
 const postService = require("./postRepository");
+const repository = require("../users/repository");
 exports.writePost = async (req, res) => {
   try {
     let { title, content, fileId, imgUrl, userId, category, petName, petAge } =
@@ -196,3 +197,8 @@ exports.getPostDetailInfo = async (req, res) => {
     res.status(500).json({ success: false, message: "서버 오류입니다." });
   }
 };
+
+// exports.getUserPosts = async (req, res) => {
+//   const user = req.user;
+//   const item = await repository.findId;
+// };

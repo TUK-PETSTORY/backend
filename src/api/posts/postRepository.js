@@ -26,7 +26,7 @@ exports.writePost = async (
 exports.showByCategory = async (category) => {
   const query = `SELECT * FROM posts WHERE category = ?`;
   const result = await pool.query(query, [category]);
-  return result.length === 0 ? null : result[0];
+  return result.length === 0 ? null : result;
 };
 
 exports.update = async (
@@ -85,3 +85,5 @@ ORDER BY
 `;
   return await pool.query(query, [category]);
 };
+
+// exports.getUserPosts = async (userId) => {};

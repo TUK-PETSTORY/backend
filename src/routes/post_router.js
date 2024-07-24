@@ -87,11 +87,11 @@ const postController = require("../api/posts/postController");
  *                 type: integer
  *                 example: 5
  *     responses:
- *       "231":
+ *       "201":
  *         description: 게시물이 성공적으로 생성되었습니다.
- *       "433":
+ *       "400":
  *         description: 잘못된 입력 데이터입니다.
- *       "533":
+ *       "500":
  *         description: 서버 오류
  */
 postRouter.post("/write", postController.writePost);
@@ -110,7 +110,7 @@ postRouter.post("/write", postController.writePost);
  *         schema:
  *           type: string
  *     responses:
- *       "233":
+ *       "200":
  *         description: 지정된 카테고리에 대한 게시물 목록
  *         content:
  *           application/json:
@@ -128,9 +128,9 @@ postRouter.post("/write", postController.writePost);
  *             category: "카테고리"
  *             pet_name: "멍멍이"
  *             pet_age: 5
- *       "433":
+ *       "400":
  *         description: 카테고리 값이 필요합니다.
- *       "533":
+ *       "500":
  *         description: 서버 오류
  */
 postRouter.get("/category/:category", postController.getPostsByCategory);
@@ -177,11 +177,11 @@ postRouter.get("/category/:category", postController.getPostsByCategory);
  *                 type: integer
  *                 example: 5
  *     responses:
- *       "233":
+ *       "200":
  *         description: 게시물이 성공적으로 수정되었습니다.
- *       "433":
+ *       "400":
  *         description: 필수 필드가 누락되었습니다.
- *       "533":
+ *       "500":
  *         description: 서버 오류
  */
 postRouter.put("/:id", postController.updatePost);
@@ -200,9 +200,9 @@ postRouter.put("/:id", postController.updatePost);
  *         schema:
  *           type: integer
  *     responses:
- *       "233":
+ *       "200":
  *         description: 게시물이 성공적으로 삭제되었습니다.
- *       "533":
+ *       "500":
  *         description: 서버 오류
  */
 postRouter.delete("/:id", postController.deletePost);

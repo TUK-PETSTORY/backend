@@ -10,6 +10,8 @@ const controller = require('../api/likes/controller');
  *      summary: "좋아요 저장"
  *      description: "좋아요를 저장합니다."
  *      tags: [Likes]
+ *      security:
+ *         - BearerAuth: []
  *      requestBody:
  *        required: true
  *        content:
@@ -51,6 +53,8 @@ router.post('', controller.save);
  *      summary: "좋아요 삭제"
  *      description: "특정 ID의 좋아요를 삭제합니다."
  *      tags: [Likes]
+ *      security:
+ *         - BearerAuth: []
  *      parameters:
  *        - in: path
  *          name: likeId
@@ -83,6 +87,8 @@ router.delete('/:likeId', controller.delete);
  *      summary: "특정 포스트 ID의 좋아요 갯수 조회"
  *      description: "특정 포스트 ID의 좋아요 갯수를 반환합니다."
  *      tags: [Likes]
+ *      security:
+ *         - BearerAuth: []
  *      parameters:
  *        - in: path
  *          name: postId
@@ -115,6 +121,8 @@ router.get('/count/post/:postId', controller.countByPostId);
  *      summary: "특정 사이트 ID의 좋아요 갯수 조회"
  *      description: "특정 사이트 ID의 좋아요 갯수를 반환합니다."
  *      tags: [Likes]
+ *      security:
+ *         - BearerAuth: []
  *      parameters:
  *        - in: path
  *          name: siteId
@@ -147,6 +155,8 @@ router.get('/count/site/:siteId', controller.countBySiteId);
  *      summary: "특정 유저 ID와 포스트 ID가 0인 모든 좋아요 조회"
  *      description: "특정 유저 ID와 포스트 ID가 0인 모든 좋아요를 조회합니다."
  *      tags: [Likes]
+ *      security:
+ *         - BearerAuth: []
  *      parameters:
  *        - in: path
  *          name: userId
@@ -193,6 +203,8 @@ router.get('/user/:userId/post/zero', controller.findByUserIdAndPostIdZero);
  *      summary: "특정 유저 ID와 사이트 ID가 0인 모든 좋아요 조회"
  *      description: "특정 유저 ID와 사이트 ID가 0인 모든 좋아요를 조회합니다."
  *      tags: [Likes]
+ *      security:
+ *         - BearerAuth: []
  *      parameters:
  *        - in: path
  *          name: userId

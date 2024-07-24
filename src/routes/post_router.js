@@ -9,6 +9,8 @@ const postController = require("../api/posts/postController");
  *   schemas:
  *     Post:
  *       type: object
+ *       security:
+ *         - BearerAuth: []
  *       properties:
  *         id:
  *           type: integer
@@ -55,6 +57,8 @@ const postController = require("../api/posts/postController");
  *     summary: "게시물 작성"
  *     description: "새로운 게시물을 작성합니다."
  *     tags: [Posts]
+ *     security:
+ *         - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -103,6 +107,8 @@ postRouter.post("/write", postController.writePost);
  *     summary: "카테고리별 게시물 조회"
  *     description: "특정 카테고리의 게시물 목록을 조회합니다."
  *     tags: [Posts]
+ *     security:
+ *         - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: category
@@ -142,6 +148,8 @@ postRouter.get("/category/:category", postController.getPostsByCategory);
  *     summary: "게시물 수정"
  *     description: "게시물을 수정합니다."
  *     tags: [Posts]
+ *     security:
+ *        - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -193,6 +201,8 @@ postRouter.put("/:id", postController.updatePost);
  *     summary: "게시물 삭제"
  *     description: "게시물을 삭제합니다."
  *     tags: [Posts]
+ *     security:
+ *         - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

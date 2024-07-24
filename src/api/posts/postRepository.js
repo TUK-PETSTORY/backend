@@ -1,6 +1,6 @@
 const { pool } = require("../../database");
 
-exports.createPost = async (
+exports.writePost = async (
   title,
   content,
   fileId,

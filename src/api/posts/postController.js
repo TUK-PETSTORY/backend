@@ -1,5 +1,5 @@
 const postService = require("./postRepository");
-exports.createPost = async (req, res) => {
+exports.writePost = async (req, res) => {
   try {
     let {
       title,
@@ -20,7 +20,7 @@ exports.createPost = async (req, res) => {
       });
     }
     // 게시물 생성
-    await postService.createPost(
+    await postService.writePost(
       title,
       content,
       file_id,
@@ -110,23 +110,21 @@ exports.updatePost = async (req, res) => {
       pet_name,
       pet_age
     );
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "게시글이 수정되었습니다.",
-        post: {
-          id: id,
-          title: title,
-          content: content,
-          file_id: file_id,
-          image_id: image_id,
-          user_id: user_id,
-          category: category,
-          pet_name: pet_name,
-          pet_age: pet_age,
-        },
-      });
+    res.status(200).json({
+      success: true,
+      message: "게시글이 수정되었습니다.",
+      post: {
+        id: id,
+        title: title,
+        content: content,
+        file_id: file_id,
+        image_id: image_id,
+        user_id: user_id,
+        category: category,
+        pet_name: pet_name,
+        pet_age: pet_age,
+      },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "서버 오류입니다." });

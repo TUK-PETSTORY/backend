@@ -94,7 +94,7 @@ const postController = require("../api/posts/postController");
  *       "533":
  *         description: 서버 오류
  */
-postRouter.post("/create", postController.createPost);
+postRouter.post("/write", postController.writePost);
 
 /**
  * @swagger

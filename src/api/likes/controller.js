@@ -22,20 +22,6 @@ exports.delete = async (req, res) => {
     }
 }
 
-exports.countByPostId = async (req, res) => {
-    const { postId } = req.params;
-    const count = await repository.countByPostId(postId);
-
-    res.send({ success: true, count });
-}
-
-exports.countBySiteId = async (req, res) => {
-    const { siteId } = req.params;
-    const count = await repository.countBySiteId(siteId);
-
-    res.send({ success: true, count });
-}
-
 exports.findByUserIdAndPostIdZero = async (req, res) => {
     const { userId } = req.params;
     const items = await repository.findByUserIdAndPostIdZero(userId);

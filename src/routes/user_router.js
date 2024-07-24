@@ -90,7 +90,7 @@ const userController = require("../api/users/controller")
  *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Iu2VmOydtCDsp7HqtawiLCJpYXQiOjE3MjE3MTIwNTV9.AU56H3pOT6svDQSfLJNSZgNbKA6wM29T0rZlBtFkjqI"
  */
 // 사용자 관련 라우트
-userRouter.post('/join', userController.join);
+userRouter.post("/join", userController.join);
 
 /**
  * @swagger
@@ -128,14 +128,14 @@ userRouter.post('/join', userController.join);
  *                    type: string
  *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Iu2VmOydtCDsp7HqtawiLCJpYXQiOjE3MjE3MTIwNTV9.AU56H3pOT6svDQSfLJNSZgNbKA6wM29T0rZlBtFkjqI"
  */
-userRouter.post('/login', userController.login);
+userRouter.post("/login", userController.login);
 
 // 피드 관련 라우트, 모든 요청에 인증 필요
-userRouter.use(authenticateToken);  // 이후 모든 라우트에 인증 적용
+userRouter.use(authenticateToken); // 이후 모든 라우트에 인증 적용
 
 /**
  * @swagger
- * paths: 
+ * paths:
  *  /user/show:
  *     get:
  *       summary: "단일 사용자 조회"
@@ -186,7 +186,7 @@ userRouter.use(authenticateToken);  // 이후 모든 라우트에 인증 적용
  *               schema:
  *                 $ref: '#/components/schemas/Error'
  */
-userRouter.get('/show', userController.show);   // 마이페이지 라우트, 인증 필요
+userRouter.get("/show", userController.show); // 마이페이지 라우트, 인증 필요
 
 /**
  * @swagger
@@ -241,4 +241,4 @@ userRouter.get('/show', userController.show);   // 마이페이지 라우트, �
  */
 userRouter.get("/all", userController.all);
 
-module.exports = userRouter
+module.exports = userRouter;

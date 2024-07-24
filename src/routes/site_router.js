@@ -16,29 +16,29 @@ const siteController = require("../api/sites/controller");
  *         id:
  *           type: integer
  *           description: "사이트 ID"
- *         site_name:
+ *         siteName:
  *           type: string
  *           description: "사이트 이름"
  *         content:
  *           type: string
  *           description: "사이트 내용"
- *         site_link:
+ *         siteUrl:
  *           type: string
  *           description: "사이트 링크"
- *         img_url:
+ *         imgUrl:
  *           type: string
  *           description: "이미지 URL"
- *         created_at:
+ *         createdAt:
  *           type: string
  *           format: date-time
  *           description: "데이터 생성일시"
  *       example:
  *         id: 1
- *         site_name: "Example Site"
+ *         siteName: "Example Site"
  *         content: "This is an example site"
- *         site_link: "http://example.com"
- *         img_url: "http://example.com/image.png"
- *         created_at: "2024-07-23T04:47:14Z"
+ *         siteUrl: "http://example.com"
+ *         imgUrl: "http://example.com/image.png"
+ *         createdAt: "2024-07-23T04:47:14Z"
  *     Error:
  *       type: object
  *       properties:
@@ -75,8 +75,8 @@ const siteController = require("../api/sites/controller");
  *                   example: "PATHROOM"
  *                 content:
  *                   type: string
- *                   example: "반려동물을 위한 프리미엄 라이프 스타일 브랜 드 PETHROOM!"
- *                 siteLink:
+ *                   example: "반려동물을 위한 프리미엄 라이프 스타일 브랜드 PETHROOM!"
+ *                 siteUrl:
  *                   type: string
  *                   example: "https://pethroom.com"
  *                 imgUrl:
@@ -140,17 +140,17 @@ siteRouter.post('/save', siteController.save);
  *                   success: true
  *                   sites:
  *                     - id: 1
- *                       site_name: "PATHROOM"
+ *                       siteName: "PATHROOM"
  *                       content: "반려동물을 위한 프리미엄 라이프 스타일 브랜드 PETHROOM!"
- *                       site_link: "https://pethroom.com"
- *                       img_url: "https://yt3.googleusercontent.com/ytc/AIdro_kbggBDMlka5N8AcWl0p-StiPEaK6WY14wVd7HEPK1LXNc=s900-c-k-c0x00ffffff-no-rj"
- *                       created_at: "2024-07-23T12:34:56Z"
+ *                       siteUrl: "https://pethroom.com"
+ *                       imgUrl: "https://yt3.googleusercontent.com/ytc/AIdro_kbggBDMlka5N8AcWl0p-StiPEaK6WY14wVd7HEPK1LXNc=s900-c-k-c0x00ffffff-no-rj"
+ *                       createdAt: "2024-07-23T12:34:56Z"
  *                     - id: 2
- *                       site_name: "arr"
+ *                       siteName: "arr"
  *                       content: "반려동물 옷은 아르르! 계절에 맞는 다양한 필수템! 우리 아이를 위한 편하면서 귀여운 반려동물 옷을 만나보세요 "
- *                       site_link: "https://www.arrr.kr"
- *                       img_url: "http://example2.com/image.png"
- *                       created_at: "2024-07-23T12:35:00Z"
+ *                       siteUrl: "https://www.arrr.kr"
+ *                       imgUrl: "http://example2.com/image.png"
+ *                       createdAt: "2024-07-23T12:35:00Z"
  *         "401":
  *           description: 인증 실패
  *           content:

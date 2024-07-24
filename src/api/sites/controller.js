@@ -1,8 +1,8 @@
 const repository = require('./repository');
 
 exports.save = async (req, res) => {
-    const { siteName, content, siteLink, imgUrl } = req.body;
-    const item = await repository.save(siteName, content, siteLink, imgUrl);
+    const { siteName, content, siteUrl, imgUrl } = req.body;
+    const item = await repository.save(siteName, content, siteUrl, imgUrl);
 
     if (item == null) {
         res.send({ success: false, message: '입력한 내용을 다시 한 번 확인해주세요.' })

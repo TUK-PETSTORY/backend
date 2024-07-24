@@ -1,8 +1,8 @@
 const { pool } = require('../../database')
 
-exports.save = async (siteName, content, siteLink, imgUrl) => {
-    const query = `INSERT INTO sites(site_name, content, site_link, img_url) VALUES (?,?,?,?)`;
-    return await pool.query(query, [siteName, content, siteLink, imgUrl]);
+exports.save = async (siteName, content, siteUrl, imgUrl) => {
+    const query = `INSERT INTO sites(site_name, content, site_url, img_url) VALUES (?,?,?,?)`;
+    return await pool.query(query, [siteName, content, siteUrl, imgUrl]);
 }
 
 exports.findAll = async () => {

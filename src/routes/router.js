@@ -42,6 +42,6 @@ router.use("/site", siteRoute);
  *   name: Posts
  *   description: 게시물 관련 API (게시물 생성, 조회, 수정, 삭제 등)
  */
-router.use("/posts", postRoute);
+router.use("/post", postRoute);
 
 module.exports = router;

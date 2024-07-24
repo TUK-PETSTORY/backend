@@ -50,7 +50,7 @@ const postController = require("../api/posts/postController");
 
 /**
  * @swagger
- * /posts/create:
+ * /post/write:
  *   post:
  *     summary: "게시물 작성"
  *     description: "새로운 게시물을 작성합니다."
@@ -98,7 +98,7 @@ postRouter.post("/create", postController.createPost);
 
 /**
  * @swagger
- * /posts/category/{category}:
+ * /post/category/{category}:
  *   get:
  *     summary: "카테고리별 게시물 조회"
  *     description: "특정 카테고리의 게시물 목록을 조회합니다."
@@ -137,7 +137,7 @@ postRouter.get("/category/:category", postController.getPostsByCategory);
 
 /**
  * @swagger
- * /posts/{id}:
+ * /post/{id}:
  *   put:
  *     summary: "게시물 수정"
  *     description: "게시물을 수정합니다."
@@ -188,7 +188,7 @@ postRouter.put("/:id", postController.updatePost);
 
 /**
  * @swagger
- * /posts/{id}:
+ * /post/{id}:
  *   delete:
  *     summary: "게시물 삭제"
  *     description: "게시물을 삭제합니다."

@@ -217,4 +217,174 @@ postRouter.put("/:id", postController.updatePost);
  */
 postRouter.delete("/:id", postController.deletePost);
 
+/**
+ * @swagger
+ * paths:
+ *  /post/all:
+ *    get:
+ *      summary: "게시물 전체 조회"
+ *      description: "게시물 전체 정보를 반환합니다."
+ *      tags: [Posts]
+ *      security:
+ *        - BearerAuth: []
+ *      responses:
+ *        "200":
+ *          description: 게시물 전체 조회 성공
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success:
+ *                    type: boolean
+ *                    description: "요청 성공 여부"
+ *                  postList:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/Post'
+ *                example:
+ *                  success: true
+ *                  postList:
+ *                    - id: 1
+ *                      title: "우리 애기 자랑"
+ *                      content: "울 애기 최공"
+ *                      fileId: 1
+ *                      imgUrl: "http://example.com/image.png"
+ *                      userId: "1"
+ *                      category: "자식자랑"
+ *                      petName: "구름이"
+ *                      petAge: 5
+ *                      createAt: "2024-07-23T04:47:14Z"
+ *        "401":
+ *          description: 인증 실패
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ *        "500":
+ *          description: 서버 오류
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ */
+postRouter.get("/all", postController.getAllPosts);
+
+/**
+ * @swagger
+ * paths:
+ *  /post/all:
+ *    get:
+ *      summary: "게시물 전체 조회"
+ *      description: "게시물 전체 정보를 반환합니다."
+ *      tags: [Posts]
+ *      security:
+ *        - BearerAuth: []
+ *      responses:
+ *        "200":
+ *          description: 게시물 전체 조회 성공
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success:
+ *                    type: boolean
+ *                    description: "요청 성공 여부"
+ *                  postList:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/Post'
+ *                example:
+ *                  success: true
+ *                  postList:
+ *                    - id: 1
+ *                      title: "우리 애기 자랑"
+ *                      content: "울 애기 최공"
+ *                      fileId: 1
+ *                      imgUrl: "http://example.com/image.png"
+ *                      userId: "1"
+ *                      category: "자식자랑"
+ *                      petName: "구름이"
+ *                      petAge: 5
+ *                      createAt: "2024-07-23T04:47:14Z"
+ *        "401":
+ *          description: 인증 실패
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ *        "500":
+ *          description: 서버 오류
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ */
+postRouter.get("/all", postController.getAllPosts);
+
+/**
+ * @swagger
+ * paths:
+ *  /post/{category}:
+ *    get:
+ *      summary: "특정 카테고리의 게시물 조회"
+ *      description: "특정 카테고리에 속하는 게시물과 해당 게시글 작성자 정보를 반환합니다."
+ *      tags: [Posts]
+ *      security:
+ *        - BearerAuth: []
+ *      parameters:
+ *        - in: path
+ *          name: category
+ *          required: true
+ *          schema:
+ *            type: string
+ *          description: "조회할 게시물의 카테고리"
+ *      responses:
+ *        "200":
+ *          description: 카테고리별 게시물 조회 성공
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success:
+ *                    type: boolean
+ *                    description: "요청 성공 여부"
+ *                  postDetailInfo:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/PostDetail'
+ *                example:
+ *                  success: true
+ *                  postDetailInfo:
+ *                    - id: 1
+ *                      title: "우리 애기 자랑"
+ *                      content: "울 애기 최공"
+ *                      fileId: 1
+ *                      imgUrl: "http://example.com/image.png"
+ *                      userId: 1
+ *                      category: "자식자랑"
+ *                      petName: "구름이"
+ *                      petAge: 5
+ *                      createAt: "2024-07-23T04:47:14Z"
+ *                      user:
+ *                        name: "홍길동"
+ *                        imgUrl: "http://example.com/user.png"
+ *                        fileId: 2
+ *        "401":
+ *          description: 인증 실패
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ *        "500":
+ *          description: 서버 오류
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ */
+postRouter.get("/:category", postController.getPostDetailInfo);
+
 module.exports = postRouter;

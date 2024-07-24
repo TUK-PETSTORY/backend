@@ -18,7 +18,7 @@ exports.findByAccountId = async (accountId) => {
 
 exports.findId = async (id) => {
     const result = await pool.query(
-        `SELECT id, account_id, name, file_id, created_at FROM users WHERE id = ?`, [id]);
+        `SELECT * FROM users WHERE id = ?`, [id]);
     return (result.length < 0) ? null : result[0];
 }
 

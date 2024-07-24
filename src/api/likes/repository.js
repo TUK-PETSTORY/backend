@@ -12,18 +12,15 @@ exports.deleteById = async (likeId) => {
     return result.affectedRows > 0;
 }
 
-exports.countByPostId = async (postId) => {
-    const rows = await pool.query(`SELECT COUNT(*) as count FROM likes WHERE post_id = ?`, [postId]);
-    return rows[0].count;
-}
-
-exports.countBySiteId = async (siteId) => {
-    const rows = await pool.query(`SELECT COUNT(*) as count FROM likes WHERE site_id = ?`, [siteId]);
-    return rows[0].count;
-}
-
 exports.findByUserIdAndPostIdZero = async (userId) => {
-    const rows = await pool.query(`SELECT * FROM likes WHERE user_id = ? AND post_id = 0`, [userId]);
+    const rows = await pool.query(`SELECT s.*
+                                    FROM sites s
+                                    JOIN (
+                                        SELECT site_id 
+                                        FROM likes 
+                                        WHERE user_id = ? AND post_id = 0
+                                    ) l ON s.id = l.site_id;
+                                    `, [userId]);
     return rows.length === 0 ? null : rows;
 }
 

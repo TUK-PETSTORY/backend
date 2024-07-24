@@ -1,6 +1,6 @@
-const userRouter = require("express").Router();
-const authenticateToken = require("../middleware/auth");
-const userController = require("../api/user/controller");
+const userRouter = require('express').Router()
+const authenticateToken = require('../middleware/auth');
+const userController = require("../api/users/controller")
 
 /**
  * @swagger

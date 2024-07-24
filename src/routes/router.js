@@ -3,9 +3,10 @@ const router = express.Router();
 
 const webController = require("../web/controller");
 
-const userRoute = require("./user_router");
-const postRoute = require("./post_router");
-const siteRoute = require("./site_router");
+const userRoute = require('./user_router');
+const siteRoute = require('./site_router');
+const likeRoute = require('./like_router');
+const postRoute = require('./post_router');
 
 const { logRequestTime } = require("../middleware/log");
 const authenticateToken = require("../middleware/auth");
@@ -39,9 +40,17 @@ router.use("/site", siteRoute);
 /**
  * @swagger
  * tags:
+ *   name: Likes
+ *   description: 좋아요 등록 조회 
+ */
+router.use('/like', likeRoute);
+
+/**
+ * @swagger
+ * tags:
  *   name: Posts
  *   description: 게시물 관련 API (게시물 생성, 조회, 수정, 삭제 등)
  */
-router.use("/post", postRoute);
+router.use('/post', postRoute);
 
 module.exports = router;

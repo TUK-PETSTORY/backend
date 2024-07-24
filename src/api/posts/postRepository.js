@@ -24,7 +24,12 @@ exports.writePost = async (
 };
 
 exports.showByCategory = async (category) => {
-  const query = `SELECT * FROM posts WHERE category = ?`;
+  const query = `
+  SELECT * 
+  FROM posts 
+  WHERE category = ? 
+  ORDER BY created_at DESC
+`;
   const result = await pool.query(query, [category]);
   return result.length === 0 ? null : result;
 };
@@ -86,4 +91,7 @@ ORDER BY
   return await pool.query(query, [category]);
 };
 
-// exports.getUserPosts = async (userId) => {};
+exports.getUserPosts = async (userId) => {
+  const query = `SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC`;
+  return await pool.query(query, [userId]);
+};

@@ -55,9 +55,29 @@ exports.getPostsByCategory = async (req, res) => {
         .json({ success: false, message: "카테고리가 없습니다." });
     }
 
-    const postList = await postService.showByCategory(category);
-    if (postList === null)
+    const posts = await postService.showByCategory(category);
+    if (posts === null) {
       return res.send({ success: false, message: "게시글이 없습니다." });
+    }
+    // 날짜 포맷 변경 함수
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      return date.toISOString().split("T")[0]; // "YYYY-MM-DD" 형식으로 변환
+    };
+
+    const postList = posts.map((post) => ({
+      id: post.id,
+      title: post.title,
+      content: post.content,
+      fileId: post.file_id,
+      imgUrl: post.img_url,
+      userId: post.user_id,
+      category: post.category,
+      petName: post.pet_name,
+      petAge: post.pet_age,
+      createAt: formatDate(post.created_at),
+    }));
+
     res.status(200).json({
       success: true,
       message: `${category}별 게시글 목록입니다.`,
@@ -200,5 +220,15 @@ exports.getPostDetailInfo = async (req, res) => {
 
 // exports.getUserPosts = async (req, res) => {
 //   const user = req.user;
-//   const item = await repository.findId;
+
+//   const item = await repository.findId(user.id);
+
+//   console.log(user);
+//   console.log(item);
+//   if (item == null) {
+//     res.send({ success: false, message: "회원을 찾을 수 없습니다." });
+//   } else {
+//     const userPosts = await postService.getUserPosts(user.id);
+//     res.send({ success: true, userPosts: userPosts });
+//   }
 // };

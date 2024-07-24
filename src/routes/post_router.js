@@ -134,6 +134,7 @@ postRouter.post("/write", postController.writePost);
  *             category: "자식자랑"
  *             petName: "멍멍이"
  *             petAge: 5
+ *             created_at: "2024-07-23"
  *       "400":
  *         description: 카테고리 값이 필요합니다.
  *       "500":
@@ -386,5 +387,74 @@ postRouter.get("/all", postController.getAllPosts);
  *                $ref: '#/components/schemas/Error'
  */
 postRouter.get("/:category", postController.getPostDetailInfo);
+
+/**
+ * @swagger
+ * paths:
+ *  /post/userId/{userId}:
+ *     get:
+ *       summary: "사용자의 모든 게시글 조회"
+ *       description: "특정 사용자의 모든 게시글을 조회합니다."
+ *       tags: [Posts]
+ *       security:
+ *         - BearerAuth: []
+ *       parameters:
+ *         - name: userId
+ *           in: path
+ *           required: true
+ *           description: "사용자 ID"
+ *           schema:
+ *             type: integer
+ *       responses:
+ *         "200":
+ *           description: 게시글 조회 성공
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   success:
+ *                     type: boolean
+ *                     description: "요청 성공 여부"
+ *                   userPosts:
+ *                     type: array
+ *                     items:
+ *                       $ref: '#/components/schemas/Post'
+ *                 example:
+ *                   success: true
+ *                   userPosts:
+ *                     - id: 1
+ *                       title: "우리 애기"
+ *                       content: "애기 최고 짱이야"
+ *                       fileId: 1
+ *                       imgUrl: ""
+ *                       userId: 1
+ *                       category: "자식자랑"
+ *                       petName: "멍멍이"
+ *                       petAge: 5
+ *                       created_at: "2024-07-23T12:34:56Z"
+ *         "401":
+ *           description: 인증 실패
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Error'
+ *         "404":
+ *           description: 사용자 정보 없음
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Error'
+ *               example:
+ *                 success: false
+ *                 message: "회원을 찾을 수 없습니다."
+ *         "500":
+ *           description: 서버 오류
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Error'
+ */
+// postRouter.get("/userId/:userId", postController.getUserPosts);
 
 module.exports = postRouter;

@@ -218,17 +218,28 @@ exports.getPostDetailInfo = async (req, res) => {
   }
 };
 
-// exports.getUserPosts = async (req, res) => {
-//   const user = req.user;
+exports.getUserPosts = async (req, res) => {
+  const user = req.user;
+  const posts = await postService.getUserPosts(user.id);
 
-//   const item = await repository.findId(user.id);
+  // 날짜 포맷 변경 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0]; // "YYYY-MM-DD" 형식으로 변환
+  };
 
-//   console.log(user);
-//   console.log(item);
-//   if (item == null) {
-//     res.send({ success: false, message: "회원을 찾을 수 없습니다." });
-//   } else {
-//     const userPosts = await postService.getUserPosts(user.id);
-//     res.send({ success: true, userPosts: userPosts });
-//   }
-// };
+  const userPosts = posts.map((post) => ({
+    id: post.id,
+    title: post.title,
+    content: post.content,
+    fileId: post.file_id,
+    imgUrl: post.img_url,
+    userId: post.user_id,
+    category: post.category,
+    petName: post.pet_name,
+    petAge: post.pet_age,
+    createAt: formatDate(post.created_at),
+  }));
+  console.log(userPosts);
+  res.send({ success: true, userPosts: userPosts });
+};

@@ -391,20 +391,13 @@ postRouter.get("/:category", postController.getPostDetailInfo);
 /**
  * @swagger
  * paths:
- *  /post/userId/{userId}:
+ *  /post:
  *     get:
  *       summary: "사용자의 모든 게시글 조회"
  *       description: "특정 사용자의 모든 게시글을 조회합니다."
  *       tags: [Posts]
  *       security:
  *         - BearerAuth: []
- *       parameters:
- *         - name: userId
- *           in: path
- *           required: true
- *           description: "사용자 ID"
- *           schema:
- *             type: integer
  *       responses:
  *         "200":
  *           description: 게시글 조회 성공
@@ -455,6 +448,6 @@ postRouter.get("/:category", postController.getPostDetailInfo);
  *               schema:
  *                 $ref: '#/components/schemas/Error'
  */
-// postRouter.get("/userId/:userId", postController.getUserPosts);
+postRouter.get("", postController.getUserPosts);
 
 module.exports = postRouter;

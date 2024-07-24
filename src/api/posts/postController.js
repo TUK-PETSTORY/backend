@@ -155,3 +155,44 @@ exports.getAllPosts = async (req, res) => {
     res.status(500).json({ success: false, message: "서버 오류입니다." });
   }
 };
+
+exports.getPostDetailInfo = async (req, res) => {
+  try {
+    const category = req.params.category;
+    const detailInfo = await postService.getPostDetailInfo(category);
+
+    // 날짜 포맷 변경 함수
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      return date.toISOString().split("T")[0]; // "YYYY-MM-DD" 형식으로 변환
+    };
+
+    // 게시글 정보와 사용자 정보를 변환
+    const postDetailInfo = detailInfo.map((post) => ({
+      id: post.id,
+      title: post.title,
+      content: post.content,
+      fileId: post.file_id,
+      imgUrl: post.img_url,
+      userId: post.user_id,
+      category: post.category,
+      petName: post.pet_name,
+      petAge: post.pet_age,
+      createAt: formatDate(post.created_at),
+      user: {
+        name: post.user_name,
+        imgUrl: post.user_img_url,
+        fileId: post.user_file_id,
+      },
+    }));
+
+    res.status(200).json({
+      success: true,
+      message: "특정 카테고리의 게시글 정보와 해당 게시글의 유저 정보입니다.",
+      postDetailInfo: postDetailInfo,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "서버 오류입니다." });
+  }
+};

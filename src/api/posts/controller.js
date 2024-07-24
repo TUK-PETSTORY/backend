@@ -1,18 +1,11 @@
-const postService = require("./postRepository");
-const repository = require("../users/repository");
+const postService = require("./repository");
+
 exports.writePost = async (req, res) => {
   try {
-    let { title, content, fileId, imgUrl, userId, category, petName, petAge } =
-      req.body;
+    let { title, content, fileId, imgUrl, userId, category, petName, petAge } = req.body;
 
     // 필수 필드 확인
     if (!title || !content || !userId || !category || !petName || !petAge) {
-      console.log(title);
-      console.log(content);
-      console.log(userId);
-      console.log(category);
-      console.log(petName);
-      console.log(petAge);
       return res.status(400).json({
         success: false,
         message: "필수 입력값이 누락되었습니다.",
@@ -42,50 +35,6 @@ exports.writePost = async (req, res) => {
       success: false,
       message: "게시글 등록에 실패했습니다.",
     });
-  }
-};
-
-exports.getPostsByCategory = async (req, res) => {
-  try {
-    const { category } = req.params;
-
-    if (!category) {
-      return res
-        .status(400)
-        .json({ success: false, message: "카테고리가 없습니다." });
-    }
-
-    const posts = await postService.showByCategory(category);
-    if (posts === null) {
-      return res.send({ success: false, message: "게시글이 없습니다." });
-    }
-    // 날짜 포맷 변경 함수
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      return date.toISOString().split("T")[0]; // "YYYY-MM-DD" 형식으로 변환
-    };
-
-    const postList = posts.map((post) => ({
-      id: post.id,
-      title: post.title,
-      content: post.content,
-      fileId: post.file_id,
-      imgUrl: post.img_url,
-      userId: post.user_id,
-      category: post.category,
-      petName: post.pet_name,
-      petAge: post.pet_age,
-      createAt: formatDate(post.created_at),
-    }));
-
-    res.status(200).json({
-      success: true,
-      message: `${category}별 게시글 목록입니다.`,
-      postList: postList,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "서버 오류입니다." });
   }
 };
 
@@ -240,6 +189,5 @@ exports.getUserPosts = async (req, res) => {
     petAge: post.pet_age,
     createAt: formatDate(post.created_at),
   }));
-  console.log(userPosts);
   res.send({ success: true, userPosts: userPosts });
 };

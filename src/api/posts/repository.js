@@ -23,17 +23,6 @@ exports.writePost = async (
   ]);
 };
 
-exports.showByCategory = async (category) => {
-  const query = `
-  SELECT * 
-  FROM posts 
-  WHERE category = ? 
-  ORDER BY created_at DESC
-`;
-  const result = await pool.query(query, [category]);
-  return result.length === 0 ? null : result;
-};
-
 exports.update = async (
   id,
   title,

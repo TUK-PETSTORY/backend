@@ -23,7 +23,8 @@ exports.delete = async (req, res) => {
 }
 
 exports.findByUserId = async (req, res) => {
-    const items = await repository.getByUserId(1);
+    const user = req.user;
+    const items = await repository.getByUserId(user.id);
 
     if (items) {
         res.send({ success: true, items });

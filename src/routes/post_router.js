@@ -1,7 +1,7 @@
 const express = require("express");
 const postRouter = express.Router();
 
-const postController = require("../api/posts/postController");
+const postController = require("../api/posts/controller");
 
 /**
  * @swagger
@@ -102,48 +102,6 @@ postRouter.post("/write", postController.writePost);
 
 /**
  * @swagger
- * /post/category/{category}:
- *   get:
- *     summary: "카테고리별 게시물 조회"
- *     description: "특정 카테고리의 게시물 목록을 조회합니다."
- *     tags: [Posts]
- *     security:
- *         - BearerAuth: []
- *     parameters:
- *       - in: path
- *         name: category
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       "200":
- *         description: 지정된 카테고리에 대한 게시물 목록
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Post'
- *         example:
- *           - id: 1
- *             title: "우리 애기"
- *             content: "애기 최고 짱이야"
- *             fileId: 0
- *             imgUrl: ""
- *             userId: 1
- *             category: "자식자랑"
- *             petName: "멍멍이"
- *             petAge: 5
- *             created_at: "2024-07-23"
- *       "400":
- *         description: 카테고리 값이 필요합니다.
- *       "500":
- *         description: 서버 오류
- */
-postRouter.get("/category/:category", postController.getPostsByCategory);
-
-/**
- * @swagger
  * /post/{id}:
  *   put:
  *     summary: "게시물 수정"
@@ -217,59 +175,6 @@ postRouter.put("/:id", postController.updatePost);
  *         description: 서버 오류
  */
 postRouter.delete("/:id", postController.deletePost);
-
-/**
- * @swagger
- * paths:
- *  /post/all:
- *    get:
- *      summary: "게시물 전체 조회"
- *      description: "게시물 전체 정보를 반환합니다."
- *      tags: [Posts]
- *      security:
- *        - BearerAuth: []
- *      responses:
- *        "200":
- *          description: 게시물 전체 조회 성공
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  success:
- *                    type: boolean
- *                    description: "요청 성공 여부"
- *                  postList:
- *                    type: array
- *                    items:
- *                      $ref: '#/components/schemas/Post'
- *                example:
- *                  success: true
- *                  postList:
- *                    - id: 1
- *                      title: "우리 애기 자랑"
- *                      content: "울 애기 최공"
- *                      fileId: 1
- *                      imgUrl: "http://example.com/image.png"
- *                      userId: "1"
- *                      category: "자식자랑"
- *                      petName: "구름이"
- *                      petAge: 5
- *                      createAt: "2024-07-23T04:47:14Z"
- *        "401":
- *          description: 인증 실패
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/Error'
- *        "500":
- *          description: 서버 오류
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/Error'
- */
-postRouter.get("/all", postController.getAllPosts);
 
 /**
  * @swagger

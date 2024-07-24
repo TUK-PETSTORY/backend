@@ -1,5 +1,5 @@
 const siteRouter = require('express').Router();
-const siteController = require("../api/site/controller");
+const siteController = require("../api/sites/controller");
 
 /**
  * @swagger

@@ -5,6 +5,7 @@ const webController = require('../web/controller');
 
 const userRoute = require('./user_router');
 const siteRoute = require('./site_router');
+const likeRoute = require('./like_router');
 
 const { logRequestTime } = require('../middleware/log');
 const authenticateToken = require('../middleware/auth');
@@ -34,5 +35,13 @@ router.use(authenticateToken);  // 이후 모든 라우트에 인증 적용
  *   description: 추천 사이트 등록 조회
  */
 router.use('/site', siteRoute);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Likes
+ *   description: 좋아요 등록 조회 
+ */
+router.use('/like', likeRoute);
 
 module.exports = router;

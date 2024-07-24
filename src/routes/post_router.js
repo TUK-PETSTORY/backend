@@ -21,33 +21,33 @@ const postController = require("../api/posts/postController");
  *         content:
  *           type: string
  *           description: "게시물 내용"
- *         file_id:
+ *         fileId:
  *           type: integer
  *           description: "파일 ID (옵션)"
- *         image_id:
+ *         imgUrl:
  *           type: string
- *           description: "이미지 ID (옵션)"
- *         user_id:
+ *           description: "이미지 url (옵션)"
+ *         userId:
  *           type: integer
  *           description: "사용자 ID"
  *         category:
  *           type: string
  *           description: "게시물 카테고리"
- *         pet_name:
+ *         petName:
  *           type: string
  *           description: "애완동물 이름"
- *         pet_age:
+ *         petAge:
  *           type: integer
  *           description: "애완동물 나이"
  *       example:
- *         title: "제목"
- *         content: "게시물 내용"
- *         file_id: 3
- *         image_id: '이미지 아이디'
- *         user_id: 3
- *         category: "카테고리"
- *         pet_name: "멍멍이"
- *         pet_age: 5
+ *         title: "우리 애기"
+ *         content: "애기 최고 짱이야"
+ *         fileId: 0
+ *         imgUrl: ""
+ *         userId: 1
+ *         category: "자식자랑"
+ *         petName: "멍멍이"
+ *         petAge: 5
  */
 
 /**
@@ -68,26 +68,26 @@ const postController = require("../api/posts/postController");
  *             properties:
  *               title:
  *                 type: string
- *                 example: "제목"
+ *                 example: "우리 애기"
  *               content:
  *                 type: string
- *                 example: "게시물 내용"
- *               file_id:
+ *                 example: "우리 애기가 짱이야"
+ *               fileId:
  *                 type: integer
- *                 example: 3
- *               image_id:
+ *                 example: 0
+ *               imgUrl:
  *                 type: string
- *                 example: '이미지 아이디'
- *               user_id:
+ *                 example: ""
+ *               userId:
  *                 type: integer
- *                 example: 3
+ *                 example: 1
  *               category:
  *                 type: string
- *                 example: "카테고리"
- *               pet_name:
+ *                 example: "자식자랑"
+ *               petName:
  *                 type: string
  *                 example: "멍멍이"
- *               pet_age:
+ *               petAge:
  *                 type: integer
  *                 example: 5
  *     responses:
@@ -126,14 +126,14 @@ postRouter.post("/write", postController.writePost);
  *                 $ref: '#/components/schemas/Post'
  *         example:
  *           - id: 1
- *             title: "제목"
- *             content: "게시물 내용"
- *             file_id: 3
- *             image_id: '이미지 아이디'
- *             user_id: 3
- *             category: "카테고리"
- *             pet_name: "멍멍이"
- *             pet_age: 5
+ *             title: "우리 애기"
+ *             content: "애기 최고 짱이야"
+ *             fileId: 0
+ *             imgUrl: ""
+ *             userId: 1
+ *             category: "자식자랑"
+ *             petName: "멍멍이"
+ *             petAge: 5
  *       "400":
  *         description: 카테고리 값이 필요합니다.
  *       "500":
@@ -159,29 +159,29 @@ postRouter.get("/category/:category", postController.getPostsByCategory);
  *             properties:
  *               id:
  *                 type: integer
- *                 example: 2
+ *                 example: 1
  *               title:
  *                 type: string
- *                 example: "제목"
+ *                 example: "우리 애기 수정"
  *               content:
  *                 type: string
- *                 example: "게시물 내용"
- *               file_id:
+ *                 example: "이 닦을 때 뽀로로 틀어주면 됨"
+ *               fileId:
  *                 type: integer
- *                 example: 3
- *               image_id:
+ *                 example: 0
+ *               imgUrl:
  *                 type: string
- *                 example: '이미지 아이디'
- *               user_id:
+ *                 example: ""
+ *               userId:
  *                 type: integer
- *                 example: 3
+ *                 example: 1
  *               category:
  *                 type: string
- *                 example: "카테고리"
- *               pet_name:
+ *                 example: "육아꿀팁"
+ *               petName:
  *                 type: string
  *                 example: "멍멍이"
- *               pet_age:
+ *               petAge:
  *                 type: integer
  *                 example: 5
  *     responses:

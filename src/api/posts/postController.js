@@ -1,35 +1,23 @@
 const postService = require("./postRepository");
 exports.writePost = async (req, res) => {
   try {
-    let {
-      title,
-      content,
-      file_id,
-      image_id,
-      user_id,
-      category,
-      pet_name,
-      pet_age,
-    } = req.body;
+    let { title, content, fileId, imgUrl, userId, category, petName, petAge } = req.body;
 
     // 필수 필드 확인
-    if (!title || !content || !user_id || !category || !pet_name || !pet_age) {
+    if (!title || !content || !userId || !category || !petName || !petAge) {
+      console.log(title);
+      console.log(content);
+      console.log(userId);
+      console.log(category);
+      console.log(petName);
+      console.log(petAge);
       return res.status(400).json({
         success: false,
         message: "필수 입력값이 누락되었습니다.",
       });
     }
     // 게시물 생성
-    await postService.writePost(
-      title,
-      content,
-      file_id,
-      image_id,
-      user_id,
-      category,
-      pet_name,
-      pet_age
-    );
+    await postService.writePost(title, content, fileId, imgUrl, userId, category, petName, petAge);
 
     // 성공 응답
     res.status(201).json({
@@ -41,7 +29,10 @@ exports.writePost = async (req, res) => {
     console.error(error);
     res
       .status(500)
-      .json({ success: false, message: "게시글 등록에 실패했습니다." });
+      .json({
+        success: false,
+        message: "게시글 등록에 실패했습니다."
+      });
   }
 };
 
@@ -71,45 +62,23 @@ exports.getPostsByCategory = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const {
-      id,
-      title,
-      content,
-      file_id,
-      image_id,
-      user_id,
-      category,
-      pet_name,
-      pet_age,
-    } = req.body;
+    const { id, title, content, fileId, imgUrl, userId, category, petName, petAge } = req.body;
 
     if (
       !id ||
       !title ||
       !content ||
-      !file_id ||
-      !image_id ||
-      !user_id ||
+      !userId ||
       !category ||
-      !pet_name ||
-      !pet_age
+      !petName ||
+      !petAge
     ) {
       return res
         .status(400)
         .json({ success: false, message: "필수 입력 값이 누락되었습니다." });
     }
 
-    const post = await postService.update(
-      id,
-      title,
-      content,
-      file_id,
-      image_id,
-      user_id,
-      category,
-      pet_name,
-      pet_age
-    );
+    const post = await postService.update(id, title, content, fileId, imgUrl, userId, category, petName, petAge);
     res.status(200).json({
       success: true,
       message: "게시글이 수정되었습니다.",
@@ -117,12 +86,12 @@ exports.updatePost = async (req, res) => {
         id: id,
         title: title,
         content: content,
-        file_id: file_id,
-        image_id: image_id,
-        user_id: user_id,
+        fileId: fileId,
+        imgUrl: imgUrl,
+        userId: userId,
         category: category,
-        pet_name: pet_name,
-        pet_age: pet_age,
+        petName: petName,
+        petAge: petAge,
       },
     });
   } catch (error) {

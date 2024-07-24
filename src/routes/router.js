@@ -43,7 +43,7 @@ router.use("/site", siteRoute);
  *   name: Likes
  *   description: 좋아요 등록 조회 
  */
-router.use('/like', likeRoute);
+router.use('/like', authenticateToken, likeRoute);
 
 /**
  * @swagger

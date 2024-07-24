@@ -22,20 +22,8 @@ exports.delete = async (req, res) => {
     }
 }
 
-exports.findByUserIdAndPostIdZero = async (req, res) => {
-    const { userId } = req.params;
-    const items = await repository.findByUserIdAndPostIdZero(userId);
-
-    if (items) {
-        res.send({ success: true, items });
-    } else {
-        res.send({ success: false, message: '조회된 항목이 없습니다.' });
-    }
-}
-
-exports.findByUserIdAndSiteIdZero = async (req, res) => {
-    const { userId } = req.params;
-    const items = await repository.findByUserIdAndSiteIdZero(userId);
+exports.findByUserId = async (req, res) => {
+    const items = await repository.getByUserId(1);
 
     if (items) {
         res.send({ success: true, items });

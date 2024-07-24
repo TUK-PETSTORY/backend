@@ -12,8 +12,6 @@ exports.save = async (req, res) => {
 }
 
 exports.all = async (req, res) => {
-    const user = req.user; // 미들웨어에서 추가된 사용자 정보
-    // 데이터베이스에서 사용자 정보 조회
     const items = await repository.findAll();
 
     // 사용자 정보가 없을 경우

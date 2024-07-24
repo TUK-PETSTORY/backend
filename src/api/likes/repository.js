@@ -12,19 +12,13 @@ exports.deleteById = async (likeId) => {
     return result.affectedRows > 0;
 }
 
-exports.findByUserIdAndPostIdZero = async (userId) => {
-    const rows = await pool.query(`SELECT s.*
-                                    FROM sites s
-                                    JOIN (
-                                        SELECT site_id 
-                                        FROM likes 
-                                        WHERE user_id = ? AND post_id = 0
-                                    ) l ON s.id = l.site_id;
-                                    `, [userId]);
+exports.getByUserId = async (userId) => {
+    const query = `SELECT s.* FROM sites s
+                    JOIN (
+                        SELECT DISTINCT site_id
+                        FROM likes
+                        WHERE user_id = ? AND post_id = 0
+                    ) l ON s.id = l.site_id`;
+    const rows = await pool.query(query, [userId]);
     return rows.length === 0 ? null : rows;
-}
-
-exports.findByUserIdAndSiteIdZero = async (userId) => {
-    const rows = await pool.query(`SELECT * FROM likes WHERE user_id = ? AND site_id = 0`, [userId]);
-    return rows.length === 0 ? null : rows;
-}
+};
